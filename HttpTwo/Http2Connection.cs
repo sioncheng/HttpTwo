@@ -37,8 +37,8 @@ namespace HttpTwo
         public bool UseTls { get; private set; }
         public X509CertificateCollection Certificates { get; private set; }
 
-        public TimeSpan ConnectionTimeout { get; set; } = TimeSpan.FromSeconds (60);
-        public bool DisablePushPromise { get; set; } = false;
+        public TimeSpan ConnectionTimeout { get; set; } //todo= TimeSpan.FromSeconds (60);
+        public bool DisablePushPromise { get; set; } //todo= false;
     }
 
     public class Http2Connection
@@ -128,7 +128,7 @@ namespace HttpTwo
             }, TaskContinuationOptions.OnlyOnFaulted).Forget ();
 
             // Start a thread to handle writing queued frames to the stream
-            var writeTask = Task.Factory.StartNew (write, TaskCreationOptions.LongRunning);
+            var writeTask = Task.Factory.StartNew<Task>(write, TaskCreationOptions.LongRunning);
             writeTask.ContinueWith (t => {
                 // TODO: Handle the error
                 Disconnect ();

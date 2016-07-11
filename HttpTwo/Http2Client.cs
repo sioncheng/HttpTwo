@@ -79,7 +79,7 @@ namespace HttpTwo
             await connection.Connect ().ConfigureAwait (false);
 
             var stream = await streamManager.Get ().ConfigureAwait (false);
-            stream.OnFrameReceived += async (frame) =>
+            stream.OnFrameReceived += /*async todo*/ (frame) =>
             {
                 // Check for an end of stream state
                 if (stream.State == StreamState.HalfClosedRemote || stream.State == StreamState.Closed)
